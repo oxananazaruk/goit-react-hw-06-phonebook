@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -8,6 +9,7 @@ import {
   ErrorMessage,
   FormButton,
 } from './ContactForm.styled';
+import { addContact } from '../../redux/contactsSlice';
 
 const formSchema = Yup.object().shape({
   name: Yup.string().min(2, 'Too Short!').required('Required'),
@@ -19,7 +21,9 @@ const formSchema = Yup.object().shape({
     .required('Required'),
 });
 
-export const ContactForm = ({ onAdd }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+
   return (
     <FormContainer>
       <Formik
