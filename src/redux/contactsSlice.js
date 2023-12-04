@@ -16,11 +16,11 @@ const contactSlice = createSlice({
       reducer(state, action) {
         state.push(action.payload);
       },
-      prepare(name, number) {
+      prepare(values) {
         return {
           payload: {
-            name,
-            number,
+            name: values.name,
+            number: values.number,
             id: nanoid(),
           },
         };

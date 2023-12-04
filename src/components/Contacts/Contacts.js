@@ -4,7 +4,6 @@ import { ContactCard } from '../ContactCard/ContactCard';
 
 export const Contacts = () => {
   const items = useSelector(state => state.contacts);
-  console.log(items);
   return (
     <List>
       {items.map(item => (
