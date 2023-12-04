@@ -23,6 +23,12 @@ const formSchema = Yup.object().shape({
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
+  // const handleSubmit = event => {
+  //   event.preventDefault();
+  //   const form = event.target;
+  //   dispatch(addContact(form.elements.text.value));
+  //   form.reset();
+  // };
 
   return (
     <FormContainer>
@@ -30,7 +36,8 @@ export const ContactForm = () => {
         initialValues={{ name: '', number: '' }}
         validationSchema={formSchema}
         onSubmit={(values, actions) => {
-          onAdd(values);
+          console.log(values);
+          dispatch(addContact(values));
           actions.resetForm();
         }}
       >
