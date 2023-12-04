@@ -1,6 +1,7 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import toast from 'react-hot-toast';
 import {
   FormContainer,
   Form,
@@ -23,12 +24,7 @@ const formSchema = Yup.object().shape({
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  // const handleSubmit = event => {
-  //   event.preventDefault();
-  //   const form = event.target;
-  //   dispatch(addContact(form.elements.text.value));
-  //   form.reset();
-  // };
+  const contacts = useSelector(state => state.contacts);
 
   return (
     <FormContainer>
@@ -36,7 +32,15 @@ export const ContactForm = () => {
         initialValues={{ name: '', number: '' }}
         validationSchema={formSchema}
         onSubmit={(values, actions) => {
-          console.log(values);
+          if (
+            contacts.some(
+              contact =>
+                contact.name.toLocaleLowerCase() ===
+                values.name.toLocaleLowerCase()
+            )
+          ) {
+            return toast.error(`${values.name} is olready in your contacts`);
+          }
           dispatch(addContact(values));
           actions.resetForm();
         }}
