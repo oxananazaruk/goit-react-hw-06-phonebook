@@ -13,7 +13,7 @@ export const Contacts = () => {
   };
 
   const itemContacts = visibleContacts();
-  
+
   return (
     <List>
       {itemContacts.map(item => (
